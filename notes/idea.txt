@@ -1,0 +1,7 @@
+ola copilot. favor criar um tabuleiro de xadrex, quadrado, 8x8, com letras A-H x 1x8, em baixo e esquerdo (ou esq., embaixo, mas acho que o primeiro), em baixo de tudo <h3>you</h3>, em cima opponent. naocoloque as pecas ainda. use hover para linha e coluna,ou seja, ao mover sobre a casa,hover clareia toda a linha e coluna e hover mostra nome da casa e.g.A1. Este app é feito para pc. mobile nao sera pensado ainda, por isso a desformatacao deste app em modile nao é tao importante. (digamos) o quadrogeraldeve caber inteiro na tela. scrolling nao é desejado agora. descentralize movendo o quadro levemente para esquerda. na area restante a direita, insira uma text input box para a PGN e ja escreva um script, que com enter com botao "move" (inserir abaixo do input), verifica se a notaca é valida: se sim, escreve um label "good move" ou em vermelho "invalid notation". para as casas do tabuleiro, use cores pastel, suaves, para a borda do tabuleiro, um marrom claro, pecas vem depois, da pasta assets. pode ajudar?
+
+codigo na pasta dashboard
+
+use tailwind para tudo
+
+ola copilot. escreve um readme basico, contributing will be accepted, workflow.md, descreva uma workflow github main-dev, faz um adiciona e commita tudo, commit -m "sketch" em main e ja muda para dev, para o proximo trabalho. depois pusha tudo para o github
