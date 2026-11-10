@@ -1,23 +1,26 @@
-# PGN Movement Dashboard
+# PGN Board
 
-A small browser-based chess movement dashboard. The current page contains an empty 8×8 board, file and rank coordinates, square hover highlighting, and a field for checking chess move notation.
+A small chess movement dashboard built with HTML, CSS, and plain JavaScript. It displays an empty 8×8 chessboard, highlights a square's rank and file, and checks the format of a move written in Standard Algebraic Notation (SAN).
+
+## Introduction
+
+The board is an early learning project: it currently focuses on the visual board, square coordinates, hover feedback, and move-notation input. It does not yet track a chess position or determine whether a move is legal.
 
 ## Run locally
 
-Open `dashboard/index.html` in a modern browser. Tailwind CSS is loaded from its CDN, so an internet connection is required for the page's styling.
+Open [`board/index.html`](board/index.html) in a modern browser, or serve the repository with a local development server.
 
-## Current features
+## Git workflow
 
-- Empty chessboard with A–H and 1–8 coordinates.
-- Hovering over or focusing a square highlights its rank and file and displays its coordinate.
-- The move input accepts common Standard Algebraic Notation (SAN) forms and reports whether the notation format looks valid.
+Use `main` for published code and `dev` for development. Commit and push changes to `dev`, then fast-forward `main` when the work is ready to publish. See [WORKFLOW.md](WORKFLOW.md) for the commands and safeguards.
 
-Notation checking currently validates format only; it does not verify whether a move is legal in a particular chess position.
+## Features
 
-## Contributing
+- Empty 8×8 board with file and rank coordinates.
+- Individually identified squares (`a1` through `h8`).
+- Pastel alternating squares; hovering or focusing a square highlights its rank and file.
+- A separate move-entry panel for common SAN notation.
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and [WORKFLOW.md](WORKFLOW.md) for the branch workflow.
+## Project status
 
-## License
-
-This project is distributed under the MIT License. See [LICENSE](LICENSE).
+Notation checking validates the input format only. Position-aware move validation, chess pieces, and game rules are not implemented yet.

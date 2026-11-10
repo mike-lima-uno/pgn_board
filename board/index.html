@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>Chess Movement Dashboard</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">♞</span>
+        <span>Chess study</span>
+      </div>
+      <div class="header-caption">Movement dashboard</div>
+    </header>
+
+    <main class="layout">
+      <div class="board-region" aria-label="Chessboard">
+        <div class="board-frame">
+          <h3 class="player-label">Opponent</h3>
+          <div class="board-coordinates">
+            <div class="rank-labels" aria-hidden="true">
+              <span>8</span><span>7</span><span>6</span><span>5</span>
+              <span>4</span><span>3</span><span>2</span><span>1</span>
+            </div>
+            <div class="board" id="chessboard" role="grid" aria-label="Empty 8 by 8 chessboard"></div>
+            <div class="file-labels" aria-hidden="true">
+              <span>A</span><span>B</span><span>C</span><span>D</span>
+              <span>E</span><span>F</span><span>G</span><span>H</span>
+            </div>
+          </div>
+          <h3 class="player-label">You</h3>
+        </div>
+      </div>
+
+      <div class="move-panel" aria-labelledby="panel-title">
+        <p class="eyebrow">Your turn</p>
+        <h1 id="panel-title">Enter a move</h1>
+        <p class="panel-description">Add a move in standard chess notation and check its format.</p>
+        <form id="move-form" novalidate>
+          <label for="move-input">PGN / SAN notation</label>
+          <input id="move-input" name="move" type="text" placeholder="e.g. Nf3 or 1. e4" autocomplete="off" spellcheck="false" aria-describedby="move-result notation-note">
+          <button type="submit">Move</button>
+          <p class="move-result" id="move-result" role="status" aria-live="polite"></p>
+        </form>
+        <p class="notation-note" id="notation-note">Enter one move, such as e4, Nf3, O-O, or 1. e4. This checks notation format only; board position and legal-move checking can be added later.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

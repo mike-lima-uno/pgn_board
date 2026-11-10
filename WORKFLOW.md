@@ -1,29 +1,69 @@
-# GitHub Branch Workflow
+# Git workflow
 
-This project uses `main` and `dev` as its long-lived branches.
+This project uses two branches:
 
-## Branch roles
+- `main` contains the published, stable version of the project.
+- `dev` is where changes are developed, reviewed, committed, and pushed.
 
-- `main` contains the stable, reviewed version of the project. Changes reach `main` through release pull requests from `dev`.
-- `dev` is the integration branch for completed work and the starting point for new feature branches.
-- Short-lived feature branches use descriptive names, such as `feature/board-coordinates` or `fix/notation-check`.
+Use fast-forward-only updates to keep the history linear. Do not force-push. If a fast-forward is rejected or the branches have diverged, stop and inspect the history before proceeding.
 
-## Day-to-day development
+## Create and publish the development branch
 
-1. Start from the latest `dev` branch and create a feature branch.
-2. Make a focused change and test it locally. For the current static page, open `dashboard/index.html` in a browser and check the board interaction and move-input behavior.
-3. Commit the change with a concise, descriptive message.
-4. Push the feature branch and open a pull request targeting `dev`.
-5. Review the pull request, address feedback, and merge it into `dev` when ready.
-6. When `dev` is ready for a stable release, open a pull request from `dev` to `main`, review it, and merge it.
+Run this once if `dev` does not exist yet:
 
-## Initial branch setup
+```sh
+git switch main
+git pull --ff-only origin main
+git switch -c dev
+git push -u origin dev
+```
 
-If `dev` does not exist yet, create it from the current `main` branch after the initial project commit, then push both branches to GitHub. Keep `main` and `dev` synchronized through pull requests rather than making routine feature changes directly on `main`.
+If `dev` already exists, switch to it and update it instead:
 
-## Commit and review guidance
+```sh
+git switch dev
+git pull --ff-only origin dev
+```
 
-- Keep each commit focused and use clear messages (for example, `Add board coordinate labels`).
-- Check the browser UI before submitting a user-facing change.
-- Describe what changed and how it was checked in the pull request.
-- Do not commit credentials, private keys, or local environment files.
+## Develop on `dev`
+
+After making changes, inspect and validate what will be committed:
+
+```sh
+git status --short
+git add -A
+git diff --cached --check
+git diff --cached
+git commit -m "Describe the change"
+git push origin dev
+```
+
+Review the staged diff before committing, especially when using `git add -A`.
+
+## Publish `dev` to `main`
+
+When the changes are ready to publish:
+
+```sh
+git switch main
+git pull --ff-only origin main
+git merge --ff-only dev
+git push origin main
+git switch dev
+git pull --ff-only origin dev
+```
+
+If `git merge --ff-only dev` fails, do not force the merge. Inspect the branches and commit graph first:
+
+```sh
+git log --oneline --graph --decorate --all
+git status --short --branch
+```
+
+## Useful checks
+
+```sh
+git branch
+git status --short --branch
+git log --oneline --graph --decorate --all
+```
