@@ -189,36 +189,6 @@ body {
   transform: scale(1.12);
 }
 
-.player-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.toggle-button {
-  padding: 5px 10px;
-  border: 1px solid #8e6e4e;
-  border-radius: 6px;
-  background: #fffaf2;
-  color: #66503a;
-  cursor: pointer;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.toggle-button:hover {
-  background: #f3e7d6;
-}
-
-.toggle-button:focus-visible {
-  outline: 3px solid #b9c9b4;
-  outline-offset: 3px;
-}
-
 .square--light {
   background: #f3e7c7;
 }
@@ -371,11 +341,6 @@ body {
 #move-form button:focus-visible {
   outline: 3px solid #b9c9b4;
   outline-offset: 3px;
-}
-
-#toggle-sides:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
 }
 
 .move-result {

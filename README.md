@@ -16,22 +16,26 @@ Use `main` for published code and `dev` for development. Commit and push changes
 
 ## Features
 
-- 8×8 board with file and rank coordinates and a standard starting setup.
+- 8×8 board with file and rank coordinates and the standard starting setup: White on ranks 1–2 and Black on ranks 7–8.
 - Individually identified squares (`a1` through `h8`).
 - Pastel alternating squares; hovering or focusing a square highlights its rank and file.
 - Drag pieces freely; when released, each piece snaps to the nearest empty square.
-- Toggle to swap the white and black sides before the first move.
-- Reset the board, with confirmation, to the selected starting side.
+- Reset the board to the standard starting position, with confirmation.
 - A separate move-entry panel for common SAN notation.
 
 ## Project status
 
-Notation checking validates the input format only; a valid notation entry disables side toggling but does not yet move a piece. Position-aware move validation and game rules are not implemented yet.
+Notation checking validates the input format only and does not yet move pieces. Position-aware move validation and game rules are not implemented yet.
 
 ## TODO
 
 - [ ] TODO: next step -> moves with notation
+- [ ] TODO: toggle pieces between players
 
 ## Sources
 
 Chess piece icons by deemakdaksina - [Flaticon](https://www.flaticon.com/free-icons/chess). See [asset source notes](assets/sources.txt).
+
+## Chess rules reference
+
+The starting position and board orientation follow the [FIDE Laws of Chess, Article 2 (The Initial Position of the Pieces on the Chessboard)](https://handbook.fide.com/chapter/E012023): the near right-hand corner is a light square, White starts on ranks 1–2, Black on ranks 7–8, and each queen starts on a square of its own colour.

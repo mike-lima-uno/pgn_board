@@ -1,7 +1,6 @@
 
 const BOARD = document.querySelector("#chessboard");
 const BOARD_COLS = "abcdefgh";
-const toggleSidesButton = document.querySelector("#toggle-sides");
 const resetButton = document.querySelector("#reset-game");
 const PIECE_FILES = {
   white: {
@@ -22,8 +21,6 @@ const PIECE_FILES = {
   },
 };
 let activeDrag = null;
-let gameStarted = false;
-let sidesToggled = false;
 
 for (let row = 0; row < 8; row += 1) {
   for (let column = 0; column < 8; column += 1) {
@@ -59,36 +56,17 @@ function addPiece(file, rank, color, type) {
   square.append(piece);
 }
 
-const backRank = ["rook", "knight", "bishop", "king", "queen", "bishop", "knight", "rook"];
-
-function swapBoardSides() {
-  const rotatedPieces = [...BOARD.querySelectorAll(".chess-piece")].map((piece) => {
-    const square = piece.parentElement;
-    const file = BOARD_COLS[BOARD_COLS.length - 1 - BOARD_COLS.indexOf(square.id[0])];
-    const rank = 9 - Number(square.id[1]);
-    return { piece, destination: document.getElementById(`${file}${rank}`) };
-  });
-  rotatedPieces.forEach(({ piece }) => piece.remove());
-  rotatedPieces.forEach(({ piece, destination }) => destination.append(piece));
-}
+const backRank = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
 
 function populateStartingPosition() {
   BOARD.querySelectorAll(".chess-piece").forEach((piece) => piece.remove());
   for (let column = 0; column < BOARD_COLS.length; column += 1) {
     const file = BOARD_COLS[column];
-    addPiece(file, 8, "white", backRank[column]);
-    addPiece(file, 7, "white", "pawn");
-    addPiece(file, 2, "black", "pawn");
-    addPiece(file, 1, "black", backRank[column]);
+    addPiece(file, 1, "white", backRank[column]);
+    addPiece(file, 2, "white", "pawn");
+    addPiece(file, 7, "black", "pawn");
+    addPiece(file, 8, "black", backRank[column]);
   }
-  if (sidesToggled) {
-    swapBoardSides();
-  }
-}
-
-function markGameStarted() {
-  gameStarted = true;
-  toggleSidesButton.disabled = true;
 }
 
 populateStartingPosition();
@@ -154,7 +132,6 @@ function finishDragging(event) {
 
     if (destination && destination.square !== origin) {
       destination.square.append(piece);
-      markGameStarted();
     }
   }
   piece.classList.remove("is-dragging");
@@ -173,21 +150,10 @@ document.addEventListener("pointercancel", () => {
   activeDrag = null;
 });
 
-toggleSidesButton.addEventListener("click", () => {
-  if (gameStarted) {
-    return;
-  }
-  sidesToggled = !sidesToggled;
-  swapBoardSides();
-  toggleSidesButton.setAttribute("aria-pressed", String(sidesToggled));
-});
-
 resetButton.addEventListener("click", () => {
   if (!window.confirm("Reset the board and clear the current move?")) {
     return;
   }
-  gameStarted = false;
-  toggleSidesButton.disabled = false;
   populateStartingPosition();
   moveInput.value = "";
   moveInput.removeAttribute("aria-invalid");
@@ -226,9 +192,6 @@ moveForm.addEventListener("submit", (event) => {
   moveInput.setAttribute("aria-invalid", String(!isValid));
   moveResult.className = `move-result ${isValid ? "is-valid" : "is-invalid"}`;
   moveResult.textContent = isValid ? "Good move · valid notation" : "Invalid notation";
-  if (isValid) {
-    markGameStarted();
-  }
 });
 
 moveInput.addEventListener("input", () => {
