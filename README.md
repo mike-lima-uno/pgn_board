@@ -8,7 +8,7 @@ The board is an early learning project: it currently focuses on the visual board
 
 ## Run locally
 
-Open [`board/index.html`](board/index.html) in a modern browser, or serve the repository with a local development server.
+Open [`index.html`](index.html) in a modern browser, or serve the repository with a local development server. The root page links to the chessboard and is the GitHub Pages entry point.
 
 ## Git workflow
 

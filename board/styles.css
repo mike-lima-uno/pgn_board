@@ -61,6 +61,29 @@ body {
   text-transform: uppercase;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-link {
+  color: #596a5c;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.back-link:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid #596a5c;
+  outline-offset: 3px;
+}
+
 .layout {
   display: grid;
   width: min(1400px, 90vw);
@@ -376,6 +399,14 @@ body {
 
   .header-caption {
     font-size: 10px;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .back-link {
+    font-size: 11px;
   }
 
   .layout {

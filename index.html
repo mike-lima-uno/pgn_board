@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the PGN Board chess project.">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>PGN Board</title>
+  <script>
+    const savedTheme = localStorage.getItem("pgn-board-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.dataset.theme = savedTheme || (prefersDark ? "dark" : "light");
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #202124;
+      background: #fff;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --page: #fff;
+      --text: #202124;
+      --muted: #4b5563;
+      --card: #fff;
+      --card-hover: #f3f4f6;
+      --border: #374151;
+      --button: #f3f4f6;
+      --button-hover: #e5e7eb;
+      --footer: #6b7280;
+      --focus: #2563eb;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      color: #d4d4d4;
+      background: #1e1e1e;
+      --page: #1e1e1e;
+      --text: #d4d4d4;
+      --muted: #d1d5db;
+      --card: #252526;
+      --card-hover: #333;
+      --border: #6b7280;
+      --button: #252526;
+      --button-hover: #333;
+      --footer: #9ca3af;
+      --focus: #60a5fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 24px;
+      background: var(--page);
+      color: var(--text);
+      transition: background-color 160ms ease, color 160ms ease;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--button);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    .theme-toggle:hover {
+      background: var(--button-hover);
+    }
+
+    .theme-toggle:focus-visible,
+    .project-card:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    main {
+      display: flex;
+      width: min(100%, 576px);
+      min-height: calc(100vh - 80px);
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      margin: 0 0 40px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 26px;
+    }
+
+    .page-header p,
+    .project-card p {
+      color: var(--muted);
+    }
+
+    .page-header p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .project-card {
+      display: block;
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 8px 24px #00000012;
+      transition: background-color 160ms ease, transform 160ms ease;
+    }
+
+    .project-card:hover {
+      background: var(--card-hover);
+      transform: translateY(-2px);
+    }
+
+    .project-card h2 {
+      margin: 0 0 12px;
+      font-size: 19px;
+    }
+
+    .project-card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .project-action {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: auto;
+      padding-top: 48px;
+      color: var(--footer);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    footer p + p {
+      margin-top: 6px;
+    }
+
+    footer a {
+      color: inherit;
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 36px 16px 24px;
+      }
+
+      main {
+        min-height: calc(100vh - 60px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+    <span id="theme-icon" aria-hidden="true">☾</span>
+  </button>
+
+  <main>
+    <header class="page-header">
+      <h1>PGN Board</h1>
+      <p>A chessboard for exploring piece placement, notation, and the rules of chess.</p>
+    </header>
+
+    <a class="project-card" href="board/index.html">
+      <h2>Chess Movement Dashboard</h2>
+      <p>Arrange pieces on the board, explore coordinates, and check chess notation.</p>
+      <span class="project-action">Open the chessboard →</span>
+    </a>
+
+    <footer>
+      <p>Created by <a href="https://github.com/mike-lima-uno">Cicero Lima</a></p>
+      <p>Under the <a href="LICENSE">MIT License</a></p>
+    </footer>
+  </main>
+
+  <script>
+    const themePreference = window.matchMedia("(prefers-color-scheme: dark)");
+    const themeToggle = document.querySelector("#theme-toggle");
+    const themeIcon = document.querySelector("#theme-icon");
+    let hasManualTheme = localStorage.getItem("pgn-board-theme") !== null;
+
+    function updateThemeButton() {
+      const isDark = document.documentElement.dataset.theme === "dark";
+      const action = isDark ? "Switch to light mode" : "Switch to dark mode";
+      themeToggle.setAttribute("aria-label", action);
+      themeToggle.setAttribute("title", action);
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeIcon.textContent = isDark ? "☼" : "☾";
+    }
+
+    themePreference.addEventListener("change", (event) => {
+      if (!hasManualTheme) {
+        document.documentElement.dataset.theme = event.matches ? "dark" : "light";
+        updateThemeButton();
+      }
+    });
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      hasManualTheme = true;
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem("pgn-board-theme", nextTheme);
+      updateThemeButton();
+    });
+
+    updateThemeButton();
+  </script>
+</body>
+</html>
