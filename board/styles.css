@@ -70,32 +70,33 @@ body {
   align-items: center;
   gap: clamp(32px, 5vw, 76px);
   margin: 0 auto;
-  padding: 28px 0;
+  padding: 16px 0;
 }
 
 .board-region {
   display: grid;
   min-width: 0;
+  grid-template-rows: auto auto auto;
   place-items: center;
+  gap: 8px;
 }
 
 .board-frame {
   display: grid;
-  width: min(100%, 70vh);
+  width: min(100%, 66vh);
   aspect-ratio: 1;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
   justify-items: center;
-  gap: clamp(12px, 2vh, 20px);
-  padding: clamp(18px, 2.5vw, 30px);
-  border: 1px solid #75583e;
+  padding: clamp(10px, 1.3vw, 16px);
+  border: 1px solid #8e6e4e;
   border-radius: 16px;
-  background: #98734f;
+  background: #ad8965;
   box-shadow: 0 20px 46px #5b493121, 0 3px 8px #5b493114;
 }
 
 .player-label {
   margin: 0;
-  color: #fff7eb;
+  color: #66503a;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -107,9 +108,9 @@ body {
   display: grid;
   width: 100%;
   min-height: 0;
-  grid-template-columns: 19px minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) 19px;
-  gap: 4px 7px;
+  grid-template-columns: 14px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 14px;
+  gap: 3px 5px;
 }
 
 .rank-labels,
@@ -118,8 +119,9 @@ body {
   align-items: center;
   justify-items: center;
   color: #fff1d9;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 12px;
+  font-family: "Arial Narrow", "Roboto Condensed", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: -0.04em;
 }
 
 .rank-labels {
@@ -136,19 +138,20 @@ body {
 
 .board {
   display: grid;
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   max-width: 100%;
   aspect-ratio: 1;
   min-width: 0;
   min-height: 0;
   grid-row: 1;
   grid-column: 2;
+  align-self: center;
   justify-self: center;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   grid-template-rows: repeat(8, minmax(0, 1fr));
   overflow: hidden;
-  border: 8px solid #777b77;
+  border: 7px solid #777b77;
   border-radius: 8px;
   background: #777b77;
   box-shadow: 0 8px 18px #3b2d1f24;
@@ -162,6 +165,58 @@ body {
   place-items: center;
   cursor: crosshair;
   transition: background-color 100ms ease;
+}
+
+.chess-piece {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.chess-piece.is-dragging {
+  visibility: hidden;
+}
+
+.chess-piece-ghost {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 5px #0005);
+  transform: scale(1.12);
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.toggle-button {
+  padding: 5px 10px;
+  border: 1px solid #8e6e4e;
+  border-radius: 6px;
+  background: #fffaf2;
+  color: #66503a;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.toggle-button:hover {
+  background: #f3e7d6;
+}
+
+.toggle-button:focus-visible {
+  outline: 3px solid #b9c9b4;
+  outline-offset: 3px;
 }
 
 .square--light {
@@ -302,9 +357,25 @@ body {
   background: #465849;
 }
 
+#move-form .reset-button {
+  margin-top: 8px;
+  border: 1px solid #bca27f;
+  background: #fffaf2;
+  color: #66503a;
+}
+
+#move-form .reset-button:hover {
+  background: #f3e7d6;
+}
+
 #move-form button:focus-visible {
   outline: 3px solid #b9c9b4;
   outline-offset: 3px;
+}
+
+#toggle-sides:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .move-result {
@@ -350,13 +421,13 @@ body {
   }
 
   .board-frame {
-    width: min(100%, 84vw, 62vh);
+    width: min(100%, 88vw, 68vh);
   }
 }
 
 @media (max-width: 420px) {
   .board-frame {
-    padding: 20px;
+    padding: 12px;
   }
 
   .move-panel {

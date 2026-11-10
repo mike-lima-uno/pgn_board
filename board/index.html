@@ -19,20 +19,23 @@
 
     <main class="layout">
       <div class="board-region" aria-label="Chessboard">
+        <h3 class="player-label">Opponent</h3>
         <div class="board-frame">
-          <h3 class="player-label">Opponent</h3>
           <div class="board-coordinates">
             <div class="rank-labels" aria-hidden="true">
               <span>8</span><span>7</span><span>6</span><span>5</span>
               <span>4</span><span>3</span><span>2</span><span>1</span>
             </div>
-            <div class="board" id="chessboard" role="grid" aria-label="Empty 8 by 8 chessboard"></div>
+            <div class="board" id="chessboard" role="grid" aria-label="Chessboard"></div>
             <div class="file-labels" aria-hidden="true">
               <span>A</span><span>B</span><span>C</span><span>D</span>
               <span>E</span><span>F</span><span>G</span><span>H</span>
             </div>
           </div>
+        </div>
+        <div class="player-controls">
           <h3 class="player-label">You</h3>
+          <button class="toggle-button" id="toggle-sides" type="button" aria-pressed="false">Toggle</button>
         </div>
       </div>
 
@@ -44,6 +47,7 @@
           <label for="move-input">PGN / SAN notation</label>
           <input id="move-input" name="move" type="text" placeholder="e.g. Nf3 or 1. e4" autocomplete="off" spellcheck="false" aria-describedby="move-result notation-note">
           <button type="submit">Move</button>
+          <button class="reset-button" id="reset-game" type="button">Reset</button>
           <p class="move-result" id="move-result" role="status" aria-live="polite"></p>
         </form>
         <p class="notation-note" id="notation-note">Enter one move, such as e4, Nf3, O-O, or 1. e4. This checks notation format only; board position and legal-move checking can be added later.</p>
